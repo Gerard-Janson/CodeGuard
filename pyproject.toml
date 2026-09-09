@@ -10,18 +10,24 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "Your Name", email = "you@example.com" }
+    { name = "Your Name", email = "gerardjanson1998@gmail.com" }
 ]
 keywords = ["security", "sast", "vulnerability", "semgrep", "trivy", "gitleaks"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Topic :: Security",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
 ]
 
 dependencies = [
-
     "semgrep>=1.70",
+    "requests>=2.31",
+    "zxcvbn>=4.4.28",
+    "jinja2>=3.1",
+    "weasyprint>=61.0",
 ]
 
 [project.optional-dependencies]
