@@ -1,7 +1,18 @@
 import subprocess
 import json
 
-def trivy_scan(path, config=None, timeout=6000):
+
+def _parse_json_output(stdout: str, tool_name: str):
+    stdout = stdout.strip()
+    if not stdout:
+        return []
+    try:
+        return json.loads(stdout)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"{tool_name} returned invalid JSON: {e}")
+
+
+def trivy_scan(path, config=None, timeout=600):
     command = ["trivy", "fs", "--format", "json"]
     if config:
         command += ["--config", config]
@@ -19,7 +30,7 @@ def trivy_scan(path, config=None, timeout=6000):
     except FileNotFoundError:
         raise RuntimeError("Trivy is not installed or not on PATH")
 
-    if result.returncode not in (0, 1):
+    if result.returncode != 0:
         raise RuntimeError(f"Trivy failed: {result.stderr}")
 
-    return json.loads(result.stdout)
+    return _parse_json_output(result.stdout, "trivy")

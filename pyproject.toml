@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "Your Name", email = "gerardjanson1998@gmail.com" }
+    { name = "Gerard Janson", email = "gerardjanson1998@gmail.com" }
 ]
 keywords = ["security", "sast", "vulnerability", "semgrep", "trivy", "gitleaks"]
 classifiers = [
