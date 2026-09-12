@@ -24,6 +24,8 @@ def trivy_scan(path, config=None, timeout=600):
             capture_output=True,
             text=True,
             timeout=timeout,
+            errors="replace",
+            encoding="utf-8"
         )
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"Trivy scan timed out after {timeout}s")

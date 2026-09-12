@@ -33,6 +33,9 @@ def gitleaks_scanner(path, no_git=False, timeout=600):
             capture_output=True,
             text=True,
             timeout=timeout,
+            errors="replace",
+            encoding="utf-8"
+
         )
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"Gitleaks scan timed out after {timeout}s")

@@ -21,6 +21,8 @@ def semgrep_scan(path, config="auto", timeout=600):
             capture_output=True,
             text=True,
             timeout=timeout,
+            errors="replace",
+            encoding="utf-8"
         )
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"Semgrep scan timed out after {timeout}s")
