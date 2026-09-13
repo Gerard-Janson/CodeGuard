@@ -10,6 +10,7 @@ from .findings.adapters import from_semgrep, from_trivy, from_gitleaks
 from .findings.merge import merge_findings
 
 from .repo.clone import clone_repo, cleanup_repo
+from .report.terminal import display_report
 
 
 def print_findings(findings):
@@ -43,7 +44,7 @@ def run_full_scan(path):
         print(f"Trivy failed: {e}")
 
     try:
-        gitleaks_raw = gitleaks_scanner(path)
+        gitleaks_raw = gitleaks_scanner(path,no_git=True)
         gitleaks_findings = from_gitleaks(gitleaks_raw)
     except RuntimeError as e:
         print(f"Gitleaks failed: {e}")
@@ -60,7 +61,7 @@ def local_run():
 
     print("Running scans, this may take a few minutes...")
     all_findings = run_full_scan(path)
-    print_findings(all_findings)
+    display_report(all_findings)
 
 
 def repo_run():
@@ -80,7 +81,7 @@ def repo_run():
     try:
         print("Running scans, this may take a few minutes...")
         all_findings = run_full_scan(temp_dir)
-        print_findings(all_findings)
+        display_report(all_findings)
     finally:
         cleanup_repo(temp_dir)
 
