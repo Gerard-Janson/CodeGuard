@@ -1,6 +1,7 @@
 import pyfiglet
 import sys
 import os
+from pathlib import Path
 
 from .scanners.semgrep_runner import semgrep_scan
 from .scanners.trivy_runner import trivy_scan
@@ -11,7 +12,6 @@ from .findings.merge import merge_findings
 
 from .repo.clone import clone_repo, cleanup_repo
 from .report.terminal import display_report
-
 
 def print_findings(findings):
     if not findings:
@@ -25,7 +25,21 @@ def print_findings(findings):
         print(f"    {f.description}")
         print()
 
+def normalize_file_path(path,root):
+    if not path:
+        return path
 
+    new_path = Path(path)
+    root_path = Path(root).resolve()
+
+    if new_path.is_absolute():
+       try:
+            new_path = new_path.relative_to(root_path)
+       except ValueError:
+            pass 
+
+    return str(new_path).replace("\\", "/")
+                
 def run_full_scan(path):
     semgrep_findings = []
     trivy_findings = []
@@ -49,7 +63,12 @@ def run_full_scan(path):
     except RuntimeError as e:
         print(f"Gitleaks failed: {e}")
 
-    return merge_findings(semgrep_findings, trivy_findings, gitleaks_findings)
+    all_findings = merge_findings(semgrep_findings, trivy_findings, gitleaks_findings)
+
+    for f in all_findings:
+        f.file_path = normalize_file_path(f.file_path, path)
+
+    return all_findings
 
 
 def local_run():
@@ -86,18 +105,15 @@ def repo_run():
         cleanup_repo(temp_dir)
 
 
-def password_check():
-    print("TODO")
-
 
 def show_menu():
+    print()
     result = pyfiglet.figlet_format("CODEGUARD", font="pagga")
     print(result)
 
     print("1. Run Local Scan")
     print("2. Run Repo")
-    print("3. Password Check")
-    print("4. Exit")
+    print("3. Exit")
 
 
 def main():
@@ -105,6 +121,7 @@ def main():
     while True:
         show_menu()
         choice = input("Please select a number: ")
+        print()
 
         try:
             choice = int(choice)
@@ -118,8 +135,6 @@ def main():
             case 2:
                 repo_run()
             case 3:
-                password_check()
-            case 4:
                 print("Goodbye!")
                 sys.exit()
             case _:
