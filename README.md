@@ -35,7 +35,7 @@ codeguard/
 ```bash
 git clone git@github.com:Gerard-Janson/CodeGuard.git
 cd CodeGuard
-python -m venv venv
+python -m venv .venv
 
 # Activate the environment:
 # Command Prompt:
@@ -50,7 +50,7 @@ pip install -e .
 ```bash
 git clone git@github.com:Gerard-Janson/CodeGuard.git
 cd CodeGuard
-python -m venv venv
+python -m venv .venv
 
 # Activate the environment:
 source .venv/bin/activate
