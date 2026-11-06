@@ -1,5 +1,7 @@
 # CodeGuard
 
+[![CI](https://github.com/Gerard-Janson/CodeGuard/actions/workflows/python-package.yml/badge.svg)](https://github.com/Gerard-Janson/CodeGuard/actions/workflows/python-package.yml)
+
 A unified security scanner that runs Semgrep, Trivy, and Gitleaks against local codebases or public Git repositories, merging their output into a single prioritized report.
 
 ## Requirements
