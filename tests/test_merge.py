@@ -1,17 +1,18 @@
 from codeguard.findings.merge import merge_findings
-from codeguard.findings.schema import Finding, Severity, FindingType
+from codeguard.findings.schema import Finding, FindingType, Severity
+
 
 def make_finding(**overrides):
-    defaults = dict(
-        tool="semgrep",
-        finding_type=FindingType.SAST,
-        severity=Severity.MEDIUM,
-        title="some-rule",
-        description="",
-        file_path="src/app.py",
-        start_line=1,
-        rule_id="rule-1",
-    )
+    defaults = {
+        "tool": "semgrep",
+        "finding_type": FindingType.SAST,
+        "severity": Severity.MEDIUM,
+        "title": "some-rule",
+        "description": "",
+        "file_path": "src/app.py",
+        "start_line": 1,
+        "rule_id": "rule-1",
+    }
     defaults.update(overrides)
     return Finding(**defaults)
 

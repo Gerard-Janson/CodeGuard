@@ -1,6 +1,6 @@
+import shutil
 import subprocess
 import tempfile
-import shutil
 
 
 def clone_repo(git_url, shallow=False, timeout=300):
@@ -13,6 +13,7 @@ def clone_repo(git_url, shallow=False, timeout=300):
     try:
         result = subprocess.run(
             command,
+            check=False,
             capture_output=True,
             text=True,
             timeout=timeout,

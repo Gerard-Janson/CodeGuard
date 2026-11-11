@@ -1,21 +1,21 @@
 from codeguard.findings.schema import (
-    Finding,
-    Severity,
-    FindingType,
     SEVERITY_MAP,
+    Finding,
+    FindingType,
+    Severity,
 )
 
 
 def make_finding(**overrides):
-    defaults = dict(
-        tool="semgrep",
-        finding_type=FindingType.SAST,
-        severity=Severity.HIGH,
-        title="some-rule",
-        description="something is wrong",
-        file_path="src/app.py",
-        start_line=10,
-    )
+    defaults = {
+        "tool": "semgrep",
+        "finding_type": FindingType.SAST,
+        "severity": Severity.HIGH,
+        "title": "some-rule",
+        "description": "something is wrong",
+        "file_path": "src/app.py",
+        "start_line": 10,
+    }
     defaults.update(overrides)
     return Finding(**defaults)
 

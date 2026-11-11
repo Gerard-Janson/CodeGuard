@@ -1,8 +1,8 @@
 from collections import defaultdict
 
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 from rich.text import Text
 
 from ..findings.schema import Severity
@@ -77,7 +77,7 @@ def print_summary(findings):
         if secrets:
             lines.append(f"[bold red]•[/bold red] {len(secrets)} secret(s) exposed")
         if critical:
-            file_count = len(set(f.file_path for f in critical))
+            file_count = len({f.file_path for f in critical})
             lines.append(
                 f"[bold red]•[/bold red] {len(critical)} CRITICAL finding(s) "
                 f"across {file_count} file(s)"

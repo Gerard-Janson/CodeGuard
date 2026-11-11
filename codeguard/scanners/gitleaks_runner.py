@@ -1,7 +1,7 @@
-import subprocess
 import json
-import tempfile
 import os
+import subprocess
+import tempfile
 
 
 def _parse_json_output(stdout: str, tool_name: str):
@@ -30,6 +30,7 @@ def gitleaks_scanner(path, no_git=False, timeout=600):
     try:
         result = subprocess.run(
             command,
+            check=False,
             capture_output=True,
             text=True,
             timeout=timeout,

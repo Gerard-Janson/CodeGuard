@@ -1,17 +1,17 @@
-import pyfiglet
-import sys
 import os
+import sys
 from pathlib import Path
 
+import pyfiglet
+
+from .findings.adapters import from_gitleaks, from_semgrep, from_trivy
+from .findings.merge import merge_findings
+from .repo.clone import cleanup_repo, clone_repo
+from .report.terminal import display_report
+from .scanners.gitleaks_runner import gitleaks_scanner
 from .scanners.semgrep_runner import semgrep_scan
 from .scanners.trivy_runner import trivy_scan
-from .scanners.gitleaks_runner import gitleaks_scanner
 
-from .findings.adapters import from_semgrep, from_trivy, from_gitleaks
-from .findings.merge import merge_findings
-
-from .repo.clone import clone_repo, cleanup_repo
-from .report.terminal import display_report
 
 def print_findings(findings):
     if not findings:

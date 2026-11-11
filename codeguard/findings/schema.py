@@ -1,7 +1,7 @@
-from enum import Enum
-from dataclasses import dataclass,field
-from typing import Optional
 import hashlib
+from dataclasses import dataclass, field
+from enum import Enum
+
 
 class Severity(str,Enum):
     CRITICAL = "critical"
@@ -37,19 +37,19 @@ class Finding:
     description: str
     file_path: str
 
-    start_line: Optional[int] = None
-    end_line: Optional[int] = None
+    start_line: int | None = None
+    end_line: int | None = None
 
-    rule_id: Optional[str] = None
-    cve_id: Optional[str] = None
+    rule_id: str | None = None
+    cve_id: str | None = None
     cwe_ids: list = field(default_factory=list)
 
-    package_name: Optional[str] = None
-    installed_version: Optional[str] = None
-    fixed_version: Optional[str] = None
+    package_name: str | None = None
+    installed_version: str | None = None
+    fixed_version: str | None = None
 
-    commit: Optional[str] = None
-    author: Optional[str] = None
+    commit: str | None = None
+    author: str | None = None
 
     references: list = field(default_factory=list)
     raw: dict = field(default_factory=dict)  

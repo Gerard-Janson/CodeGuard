@@ -1,5 +1,6 @@
 
-from .schema import SEVERITY_MAP, Finding, Severity, FindingType
+from .schema import SEVERITY_MAP, Finding, FindingType, Severity
+
 
 def from_semgrep(semgrep_scan_results):
     findings = []

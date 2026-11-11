@@ -1,5 +1,5 @@
-import subprocess
 import json
+import subprocess
 
 
 def _parse_json_output(stdout: str, tool_name: str):
@@ -21,6 +21,7 @@ def trivy_scan(path, config=None, timeout=600):
     try:
         result = subprocess.run(
             command,
+            check=False,
             capture_output=True,
             text=True,
             timeout=timeout,

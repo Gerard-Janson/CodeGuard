@@ -1,5 +1,6 @@
-from codeguard.findings.adapters import from_semgrep,from_gitleaks,from_trivy
-from codeguard.findings.schema import FindingType,Severity
+from codeguard.findings.adapters import from_gitleaks, from_semgrep, from_trivy
+from codeguard.findings.schema import FindingType, Severity
+
 
 def test_from_semgrep_normal_results():
     sample = {
